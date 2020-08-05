@@ -36,19 +36,26 @@ class Chart extends StatelessWidget {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 6,
       margin: EdgeInsets.all(20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: groupedTransactionValues.map((transaction) {
-          return ChartBar(
-              transaction['day'],
-              transaction['amount'],
-              totalSpending == 0.0 ? 0.0 : (transaction['amount'] as double) / totalSpending);
-        }).toList(),
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: groupedTransactionValues.map((transaction) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                  transaction['day'],
+                  transaction['amount'],
+                  totalSpending == 0.0 ? 0.0 : (transaction['amount'] as double) / totalSpending),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
